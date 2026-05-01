@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37216.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAcademyCqrsDesignPattern", "MyAcademyCqrsDesignPattern\MyAcademyCqrsDesignPattern.csproj", "{6AD5BA84-27AC-4E2B-9F90-8CBFA103EA1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AD5BA84-27AC-4E2B-9F90-8CBFA103EA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD5BA84-27AC-4E2B-9F90-8CBFA103EA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD5BA84-27AC-4E2B-9F90-8CBFA103EA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD5BA84-27AC-4E2B-9F90-8CBFA103EA1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4EDFE96-D2AE-4481-A251-A64AD02D6DE8}
+	EndGlobalSection
+EndGlobal
