@@ -1,6 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using MyAcademyCqrsDesignPattern.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MsSqlServer"));
+
+
+});
+
+
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -19,6 +37,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapControllerRoute(
+           name: "areas",
+           pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+         );
+
 
 app.MapControllerRoute(
     name: "default",
