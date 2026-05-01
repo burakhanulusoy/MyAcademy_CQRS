@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using MyAcademyCqrsDesignPattern.Context;
+using MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.CategoryHandlers;
+using MyAcademyCqrsDesignPattern.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 
 
 
@@ -17,7 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 
-
+builder.Services.AddCqrsHandlers();
 
 builder.Services.AddControllersWithViews();
 

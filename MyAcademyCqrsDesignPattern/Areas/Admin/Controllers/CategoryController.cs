@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.CategoryHandlers;
+using System.Threading.Tasks;
 
 namespace MyAcademyCqrsDesignPattern.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    [Area("Admin")]
+    public class CategoryController(GetCategoriesQueryHandler _getCategoriesQueryHandler) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var categories = await _getCategoriesQueryHandler.Handle();
+            return View(categories);
         }
+
+
+
     }
 }
