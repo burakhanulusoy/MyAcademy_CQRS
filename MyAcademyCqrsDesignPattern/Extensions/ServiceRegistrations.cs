@@ -9,6 +9,7 @@ namespace MyAcademyCqrsDesignPattern.Extensions
         public static void AddCqrsHandlers(this IServiceCollection services)
         {
             services.AddScoped<GetCategoriesQueryHandler>();
+            services.AddScoped<GetCategoryByIdQueryHandler>();
 
 
         }
