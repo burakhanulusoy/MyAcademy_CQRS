@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MyAcademyCqrsDesignPattern.Context;
 using MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.CategoryHandlers;
 using MyAcademyCqrsDesignPattern.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 });
 
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddCqrsHandlers();
 

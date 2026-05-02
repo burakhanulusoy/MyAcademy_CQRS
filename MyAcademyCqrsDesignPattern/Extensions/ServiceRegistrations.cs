@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.CategoryHandlers;
+using MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.ProductHandlers;
 using System.Reflection;
 
 namespace MyAcademyCqrsDesignPattern.Extensions
@@ -16,6 +17,13 @@ namespace MyAcademyCqrsDesignPattern.Extensions
             services.AddScoped<CreateCategoryCommandHandler>();
             services.AddScoped<RemoveCategoryCommandHandler>();
 
+
+
+            services.AddScoped<GetProductByIdQueryHandler>();
+            services.AddScoped<GetProductsQueryHandler>();
+            services.AddScoped<UpdateProductCommandHandler>();
+            services.AddScoped<CreateProductCommandHandler>();
+            services.AddScoped<RemoveProductCommandHandler>();
 
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

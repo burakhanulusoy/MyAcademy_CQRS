@@ -1,0 +1,90 @@
+﻿@model CreateProductCommand
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form method="post" id="createProductForm">
+
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Ürün Adı</label>
+        <input asp-for="Name" class="form-control" placeholder="Ürün adını giriniz..." />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Ürün Açıklaması</label>
+        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Ürün açıklamasını giriniz..."></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Kategori</label>
+        <select asp-items="@ViewBag.categories" asp-for="CategoryId" class="form-control">
+            <option value="">Lütfen Kategori Seçiniz</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Görsel URL</label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="Örn: https://..." />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Fiyat</label>
+        <input asp-for="Price" class="form-control" placeholder="0.00" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <button type="button" onclick="confirmCreate()" class="btn btn-success mt-2">
+        <i class="fas fa-save"></i> Kaydet
+    </button>
+
+</form>
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function confirmCreate() {
+        // Önce kullanıcının bir isim girip girmediğini kontrol edelim (Basit Doğrulama)
+        var categoryName = document.getElementById("Name").value;
+
+        if (categoryName.trim() === "") {
+            // Eğer input boşsa hata alerti göster ve işlemi durdur
+            Swal.fire({
+                icon: "error",
+                title: "Eksik Bilgi!",
+                text: "Lütfen bir kategori adı giriniz."
+            });
+            return;
+        }
+
+        // Eğer input doluysa onay penceresini göster
+        Swal.fire({
+            title: "Kaydetmek istediğinize emin misiniz?",
+            text: "'" + categoryName + "' adlı kategori sisteme eklenecektir.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745", // Başarı (success) rengi yeşil
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, oluştur!",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Kullanıcı onay verirse, formu Controller'daki [HttpPost] metoduna gönder
+                document.getElementById("createProductForm").submit();
+            }
+        });
+    }
+</script>

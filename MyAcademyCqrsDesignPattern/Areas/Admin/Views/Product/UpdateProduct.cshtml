@@ -1,0 +1,47 @@
+﻿@model UpdateProductCommand
+@{
+    ViewData["Title"] = "UpdateProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Ürün Adı</label>
+        <input asp-for="Name" class="form-control" placeholder="Ürün adını giriniz..." />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Ürün Açıklaması</label>
+        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Ürün açıklamasını giriniz..."></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Kategori</label>
+        <select asp-items="@ViewBag.categories" asp-for="CategoryId" class="form-control">
+            <option value="">Lütfen Kategori Seçiniz</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Görsel URL</label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="Örn: https://..." />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Fiyat</label>
+        <input asp-for="Price" class="form-control" placeholder="0.00" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <button  class="btn btn-success mt-2">
+        <i class="fas fa-save"></i> Düzenle
+    </button>
+
+</form>
