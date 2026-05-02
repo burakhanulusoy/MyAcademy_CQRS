@@ -1,4 +1,4 @@
-﻿@model GetCategoryByIdQueryResult
+﻿@model UpdateCategoryCommand
 
 
 @{
@@ -15,6 +15,9 @@
         <input asp-for="Name" class="form-control" type="text" placeholder="Kategori adını giriniz..."  />
     </div>
     <br />
+
+    <span class="text-danger">@Html.ValidationSummary()</span>
+
     <button class="btn btn-outline-success">Düzenle</button>
 
 </form>

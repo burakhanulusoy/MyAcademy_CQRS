@@ -1,4 +1,6 @@
-﻿using MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.CategoryHandlers;
+﻿using FluentValidation;
+using MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.CategoryHandlers;
+using System.Reflection;
 
 namespace MyAcademyCqrsDesignPattern.Extensions
 {
@@ -11,6 +13,12 @@ namespace MyAcademyCqrsDesignPattern.Extensions
             services.AddScoped<GetCategoriesQueryHandler>();
             services.AddScoped<GetCategoryByIdQueryHandler>();
             services.AddScoped<UpdateCategoryCommandHandler>();
+            services.AddScoped<CreateCategoryCommandHandler>();
+            services.AddScoped<RemoveCategoryCommandHandler>();
+
+
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 
         }

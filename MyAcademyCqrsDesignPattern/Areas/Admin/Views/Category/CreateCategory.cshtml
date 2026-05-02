@@ -1,0 +1,53 @@
+﻿@model CreateCategoryCommand
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" id="createCategoryForm">
+
+    <div class="form-group">
+        <label>Kategori Adı</label>
+        <input asp-for="Name" class="form-control" type="text" placeholder="Kategori adını giriniz..." />
+    </div>
+    <br />
+
+    <button type="button" onclick="confirmCreate()" class="btn btn-outline-success">Oluştur</button>
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function confirmCreate() {
+        // Önce kullanıcının bir isim girip girmediğini kontrol edelim (Basit Doğrulama)
+        var categoryName = document.getElementById("Name").value;
+
+        if (categoryName.trim() === "") {
+            // Eğer input boşsa hata alerti göster ve işlemi durdur
+            Swal.fire({
+                icon: "error",
+                title: "Eksik Bilgi!",
+                text: "Lütfen bir kategori adı giriniz."
+            });
+            return;
+        }
+
+        // Eğer input doluysa onay penceresini göster
+        Swal.fire({
+            title: "Kaydetmek istediğinize emin misiniz?",
+            text: "'" + categoryName + "' adlı kategori sisteme eklenecektir.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745", // Başarı (success) rengi yeşil
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, oluştur!",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Kullanıcı onay verirse, formu Controller'daki [HttpPost] metoduna gönder
+                document.getElementById("createCategoryForm").submit();
+            }
+        });
+    }
+</script>
