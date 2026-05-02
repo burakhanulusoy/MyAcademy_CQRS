@@ -10,6 +10,7 @@ namespace MyAcademyCqrsDesignPattern.Extensions
         {
             services.AddScoped<GetCategoriesQueryHandler>();
             services.AddScoped<GetCategoryByIdQueryHandler>();
+            services.AddScoped<UpdateCategoryCommandHandler>();
 
 
         }
