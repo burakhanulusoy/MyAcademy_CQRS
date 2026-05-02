@@ -7,6 +7,6 @@ namespace MyAcademyCqrsDesignPattern.CqrsPattern.Results.ProductResults;
                                          string Description,
                                          decimal Price,
                                          string ImageUrl,
-                                         int CategoryId,
-                                         GetCategoriesQueryResult Category);
+                                         int CategoryId
+                                        );
     

@@ -11,7 +11,7 @@ namespace MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.ProductHandlers
         public async Task<GetProductByIdQueryResult> Handle(GetProductByIdQuery getProductByIdQuery)
         {
 
-            var product = await _context.Products.Include(x => x.Category).Where(x => x.Id == getProductByIdQuery.Id).AsNoTracking().FirstOrDefaultAsync();
+            var product = await _context.Products.FindAsync(getProductByIdQuery.Id);
             
 
             return _mapper.Map<GetProductByIdQueryResult>(product);

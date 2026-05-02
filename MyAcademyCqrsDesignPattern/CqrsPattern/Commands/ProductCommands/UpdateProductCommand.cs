@@ -3,12 +3,12 @@
 namespace MyAcademyCqrsDesignPattern.CqrsPattern.Commands.ProductCommands;
 
     public record UpdateProductCommand(int Id,
-                                         string? Name,
-                                         string? Description,
-                                         decimal? Price,
-                                         string? ImageUrl,
-                                         int CategoryId,
-                                         GetCategoriesQueryResult Category);
+                                       string? Name,
+                                       string? Description,
+                                       decimal? Price,
+                                       string? ImageUrl,
+                                       int CategoryId
+                                        );
     
 
     
