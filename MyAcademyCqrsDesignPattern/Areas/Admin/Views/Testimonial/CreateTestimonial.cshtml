@@ -1,0 +1,74 @@
+﻿@model CreateTestimonialCommand
+@{
+    ViewData["Title"] = "CreateTestimonial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" id="createTestimonialForm">
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Yorum Yapan Kişi Adı</label>
+        <input asp-for="FullName" class="form-control" placeholder="Ad ve soyad giriniz..." />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Yorum</label>
+        <textarea asp-for="Comment" class="form-control" rows="3" placeholder="Yorum metnini giriniz..."></textarea>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Görsel URL</label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="Örn: https://..." />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Meslek / Ünvan</label>
+        <input asp-for="Title" class="form-control" placeholder="Örn: Yazılım Mühendisi" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <button type="button" onclick="confirmCreate()" class="btn btn-success mt-2">
+        <i class="fas fa-save"></i> Kaydet
+    </button>
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function confirmCreate() {
+        // Önce kullanıcının bir isim girip girmediğini kontrol edelim (Basit Doğrulama)
+        // Not: asp-for="FullName" html tarafında id="FullName" üretir.
+        var fullName = document.getElementById("FullName").value;
+
+        if (fullName.trim() === "") {
+            // Eğer input boşsa hata alerti göster ve işlemi durdur
+            Swal.fire({
+                icon: "error",
+                title: "Eksik Bilgi!",
+                text: "Lütfen bir isim giriniz."
+            });
+            return;
+        }
+
+        // Eğer input doluysa onay penceresini göster
+        Swal.fire({
+            title: "Kaydetmek istediğinize emin misiniz?",
+            text: "'" + fullName + "' adlı kişinin yorumu sisteme eklenecektir.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745", // Başarı (success) rengi yeşil
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, oluştur!",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Kullanıcı onay verirse, formu Controller'daki [HttpPost] metoduna gönder
+                document.getElementById("createTestimonialForm").submit();
+            }
+        });
+    }
+</script>
