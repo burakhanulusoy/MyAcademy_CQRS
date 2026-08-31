@@ -22,6 +22,7 @@ namespace MyAcademyCqrsDesignPattern.CqrsPattern.Handlers.CategoryHandlers
             //    Id = x.Id,
             //    Name = x.Name
 
+
             //}).ToList();
 
        

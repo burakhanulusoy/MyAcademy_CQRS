@@ -14,9 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MsSqlServer"));
-
-
 });
+
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
