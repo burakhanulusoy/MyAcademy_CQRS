@@ -1,0 +1,55 @@
+﻿@model GetCustomersWithOrdersQueryResult
+@{
+    ViewData["Title"] = "Müşteri Sipariş Detayı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int orderCount = 0;
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Müşteri Bilgileri</h5>
+    </div>
+    <div class="card-body">
+        <p><strong>Ad Soyad:</strong> @Model.NameSurname</p>
+        <p><strong>Şehir:</strong> @Model.City</p>
+        <p><strong>Telefon:</strong> @Model.PhoneNumber</p>
+    </div>
+</div>
+
+<h5>Siparişleri</h5>
+
+@if (Model.Orders == null || !Model.Orders.Any())
+{
+    <div class="alert alert-info">Bu müşteriye ait sipariş bulunmamaktadır.</div>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Açıklama</th>
+                <th>Fiyat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                orderCount++;
+                <tr>
+                    <td>@orderCount</td>
+                    <td>@order.OrderResult</td>
+                    <td>@order.Price.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr class="fw-bold">
+                <td colspan="2">Toplam</td>
+                <td>@Model.Orders.Sum(x => x.Price).ToString("C")</td>
+            </tr>
+        </tfoot>
+    </table>
+}
+
+<a asp-action="Index" class="btn btn-secondary mt-2">Geri Dön</a>

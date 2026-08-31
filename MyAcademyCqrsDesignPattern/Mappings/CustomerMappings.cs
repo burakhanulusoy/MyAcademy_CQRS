@@ -16,6 +16,7 @@ namespace MyAcademyCqrsDesignPattern.Mappings
             CreateMap<Customer,UpdateCustomerCommand>().ReverseMap();
             CreateMap<GetCustomerByIdQueryResult, UpdateCustomerCommand>();
 
+            CreateMap<Customer, GetCustomersWithOrdersQueryResult>().ReverseMap();
 
         }
 

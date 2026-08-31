@@ -15,8 +15,9 @@ namespace MyAcademyCqrsDesignPattern.Areas.Admin.Controllers
                                     GetCustomersQueryHandler _getCustomersQueryHandler,
                                     CreateCustomerCommandHandler _createCustomerCommandHandler,
                                     UpdateCustomerCommandHandler _updateCustomerCommandHandler,
-                                    RemoveCustomerCommandHandler _removeCustomerCommandHandler
-                                    ,IMapper _mapper ) : Controller
+                                    RemoveCustomerCommandHandler _removeCustomerCommandHandler,
+                                    GetCustomersByIdWiithOrdersQueryHandler _getCustomersByIdWiithOrdersQueryHandler
+                                    , IMapper _mapper ) : Controller
     {
         public async Task<IActionResult> Index()
         {
@@ -74,6 +75,16 @@ namespace MyAcademyCqrsDesignPattern.Areas.Admin.Controllers
             await  _updateCustomerCommandHandler.Handle(updateCustomerCommand);
             return RedirectToAction(nameof(Index));
         }
+
+
+        public async Task<IActionResult> GetCustomerWithOrder(int id)
+        {
+            var items =await _getCustomersByIdWiithOrdersQueryHandler.Handle(new GetCustomerByIdWithOrdersQuery(id));
+            return View(items);
+
+
+        }
+
 
     }
 }

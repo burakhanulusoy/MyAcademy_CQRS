@@ -1,0 +1,41 @@
+﻿@model List<GetOrdersQueryResult>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int orderCount = 0;
+}
+
+<table class="table table-bordered table-hover">
+
+
+    <tr>
+        <td>#</td>
+        <td>Fiyat</td>
+        <td>Açıklaması</td>
+        <td>Siparişi veren kişi</td>
+        <td>İşlemler</td>
+    </tr>
+
+
+    @foreach(var item in Model)
+    {
+        orderCount++;
+        <tr>
+            <td>@orderCount</td>
+            <td>@item.Price</td>
+            <td>@item.OrderResult</td>
+            <td>@item.Customer.NameSurname</td>
+            <td>
+
+                <a href="/Admin/Order/UpdateOrder/@item.Id" class="btn btn-info">Güncelle</a>
+                <a href="/Admin/Order/RemoveOrder/@item.Id" class="btn btn-danger">Sil</a>
+
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+
+<a href="/Admin/Order/CreateOrder" class="btn btn-success">ekle</a>

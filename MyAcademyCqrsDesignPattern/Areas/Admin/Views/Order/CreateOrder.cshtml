@@ -1,0 +1,81 @@
+﻿@model CreateOrderCommand
+@{
+    ViewData["Title"] = "CreateOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<form method="post" id="createOrderForm">
+
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">sipariş değeri</label>
+        <input asp-for="Price" class="form-control" placeholder="Ürün adını giriniz..." />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">Ürün Açıklaması</label>
+        <textarea asp-for="OrderResult" class="form-control" rows="3" placeholder="Ürün açıklamasını giriniz..."></textarea>
+        <span asp-validation-for="OrderResult" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="font-weight-bold">siparişi veren</label>
+        <select asp-items="@ViewBag.Customers" asp-for="CustomerId" class="form-control">
+            <option value="">Lütfen Kategori Seçiniz</option>
+        </select>
+        <span asp-validation-for="CustomerId" class="text-danger"></span>
+    </div>
+
+    
+
+    <button type="button" onclick="confirmCreate()" class="btn btn-success mt-2">
+        <i class="fas fa-save"></i> Kaydet
+    </button>
+
+</form>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmCreate() {
+        var price = document.getElementById("Price").value;
+        var orderResult = document.getElementById("OrderResult").value;
+        var customerId = document.getElementById("CustomerId").value;
+
+        if (price.trim() === "" || orderResult.trim() === "" || customerId === "") {
+            Swal.fire({
+                icon: "error",
+                title: "Eksik Bilgi!",
+                text: "Lütfen tüm alanları doldurunuz."
+            });
+            return;
+        }
+
+        var customerName = document.getElementById("CustomerId")
+                                   .selectedOptions[0].text;
+
+        Swal.fire({
+            title: "Kaydetmek istediğinize emin misiniz?",
+            text: customerName + " adına " + price + " TL tutarında sipariş oluşturulacaktır.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, oluştur!",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("createOrderForm").submit();
+            }
+        });
+    }
+</script>
